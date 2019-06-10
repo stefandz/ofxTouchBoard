@@ -36,6 +36,8 @@ class ofxTouchBoard {
 
 		void useBoardThresholds(bool b);
 
+		int getSoftIndex();
+
 		const vector<ofxTB::Electrode>& getData();
 		const vector<ofxTB::Electrode>& getRawData();
 		const vector<ofParameter<float> >& getTouchThresholds();

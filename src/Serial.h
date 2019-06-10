@@ -16,11 +16,13 @@ class Serial : public ofThread {
 	bool bConnected;
 
 	public:
+		Serial();
 		void setup();
 		void setup(int deviceId);
 		void threadedFunction();
         int available();
 		void logData();
+		int getSoftIndex();
 
 		vector<ofxTB::Electrode> getData();
 		vector<ofxTB::Electrode> getNormalizedData();
@@ -29,4 +31,5 @@ class Serial : public ofThread {
 		void connect();
 		void init();
 		void readLine();
+		int softIndex;
 };

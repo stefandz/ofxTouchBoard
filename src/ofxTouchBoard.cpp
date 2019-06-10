@@ -93,6 +93,10 @@ void ofxTouchBoard::updateStatus(){
 
 }
 
+int ofxTouchBoard::getSoftIndex(){
+	return(serial.getSoftIndex());
+}
+
 void ofxTouchBoard::logData(){
 	serial.logData();
 }

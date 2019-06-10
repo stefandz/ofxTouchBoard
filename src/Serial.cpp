@@ -1,5 +1,9 @@
 #include "Serial.h"
 
+Serial::Serial(){
+	softIndex = -1;
+}
+
 void Serial::setup(){
 	deviceNb = -1;
 
@@ -104,6 +108,12 @@ void Serial::readLine(){
 				else if(dataKey == "DIFF:"){
 					data[i].diff = val;
 				}
+				else if(dataKey == "INDX:"){
+					if(softIndex == -1){
+						softIndex = val;
+					}
+					break;
+				}					
 				else{
 					// ofLogError() << "Unrecognized key: " << dataKey; 
 				}
@@ -132,4 +142,8 @@ void Serial::logData(){
 				<< left << setw(5) << e.bval
 				<< left << setw(5) << e.diff << endl;
 	}
+}
+
+int Serial::getSoftIndex(){
+	return(softIndex);
 }
