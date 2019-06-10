@@ -58,4 +58,6 @@ class ofxTouchBoard {
 		void printDataLine(float val, float x, float y);
 		void printDataLine(int val, float x, float y);
 		void exit(ofEventArgs& e);
+		int updatesWithoutIndex;
+		int savedDeviceId;
 };

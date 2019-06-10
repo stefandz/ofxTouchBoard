@@ -23,6 +23,7 @@ class Serial : public ofThread {
         int available();
 		void logData();
 		int getSoftIndex();
+		void close();
 
 		vector<ofxTB::Electrode> getData();
 		vector<ofxTB::Electrode> getNormalizedData();

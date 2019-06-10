@@ -36,6 +36,10 @@ void Serial::connect(){
 	}
 }
 
+void Serial::close(){
+	serial.close();
+}
+
 void Serial::threadedFunction(){
 	while(isThreadRunning()){
 		readLine();

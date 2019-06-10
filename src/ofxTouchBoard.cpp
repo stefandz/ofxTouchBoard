@@ -1,6 +1,7 @@
 #include "ofxTouchBoard.h"
 
 void ofxTouchBoard::setup(int deviceId){
+	savedDeviceId = deviceId;
 	serial.setup(deviceId);
 	init();
 }
@@ -25,6 +26,7 @@ void ofxTouchBoard::init(){
 	setupThresholds();
 
 	touchStatus = vector<bool>(ofxTB::ELECTRODES_NB, false);
+	updatesWithoutIndex = 0;
 }
 
 void ofxTouchBoard::setupThresholds(){
@@ -63,6 +65,16 @@ void ofxTouchBoard::update(){
 		ofLog() << "electrodes.size() != rawData.size()";
 	}
 	updateStatus();
+
+	if( serial.getSoftIndex() == -1){
+		// if we go 3 updates without an index update, try closing the serial port and starting again
+		if(	updatesWithoutIndex++ > 3){
+			updatesWithoutIndex = 0;
+			serial.close();
+			ofLogError() << "ofxTouchBoard timed out waiting for board with deviceId " << savedDeviceId << " to send data. Closing its serial port and calling setup() again.";
+			setup(savedDeviceId);
+		}
+	}
 }
 
 void ofxTouchBoard::updateStatus(){
